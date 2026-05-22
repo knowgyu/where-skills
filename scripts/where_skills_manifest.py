@@ -12,13 +12,16 @@ import json
 
 MANIFEST = {
     "name": "where-skills",
-    "status": "working-mvp-seed",
+    "status": "officewhere-provider-seed",
     "role_split": {
         "MailWhere": "mail/task provider",
         "OfficeWhere": "document provider",
         "where-skills": "Codex orchestration layer",
     },
     "default_policy": "read_only_suggestive",
+    "current_capabilities": [
+        "officewhere_provider_discovery_client"
+    ],
     "forbidden": [
         "mail_send_reply_delete_move_mark",
         "source_document_edit_delete_move_overwrite",
@@ -28,7 +31,6 @@ MANIFEST = {
     ],
     "future_capabilities": [
         "mailwhere_provider_client",
-        "officewhere_provider_client",
         "combined_evidence_brief",
         "routing_hints_after_explicit_approval",
         "optional_mcp_after_contracts_stabilize",

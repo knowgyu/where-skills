@@ -1,59 +1,76 @@
 # where-skills
 
-`where-skills` is a Codex CLI orchestration seed for connecting MailWhere and OfficeWhere safely.
+Codex skill + helper scripts that combine:
 
-- **MailWhere = mail/task provider**: owns mail-derived tasks, review candidates, reminders, and future mail search/provider behavior.
-- **OfficeWhere = document provider**: owns local Office/PDF document search, version groups, duplicates, and comparison evidence.
-- **where-skills = Codex orchestration layer**: turns a user request into read-only provider calls, evidence briefings, and draft next actions.
+- **MailWhere**: mail/task context provider
+- **OfficeWhere**: document evidence provider
+- **where-skills**: read-only orchestration and briefing
 
-The first version is intentionally a **working MVP seed**, not a full runtime integration. It defines the skill surface, provider contracts, and safety boundaries so MailWhere and OfficeWhere can evolve as separate products.
+## Install
 
-## Example target prompts
+Copy the skill directory into your Codex skills folder:
 
-```text
-$where-skills 오늘 해야 할 일 정리하고 관련 문서 찾아서 초안 만들어줘
-$where-skills 2월 임원 보고자료 관련 메일과 문서가 뭐였지?
-$where-skills 신입교육 관련 최근 내용 알려줘
+```bash
+mkdir -p ~/.codex/skills
+cp -R skills/where-skills ~/.codex/skills/
 ```
 
-## Safety boundaries
+The skill directory includes its OfficeWhere helper. From this repo, run:
 
-`where-skills` is read-only by default.
+```bash
+python scripts/officewhere_provider.py discover
+```
+
+After copying only the skill directory, the same helper is at:
+
+```bash
+python ~/.codex/skills/where-skills/scripts/officewhere_provider.py discover
+```
+
+## OfficeWhere discovery
+
+Normal use: start OfficeWhere, then run the skill. No env var is required.
+
+Discovery order:
+
+1. `OFFICEWHERE_BASE_URL` loopback override, if set
+2. Windows v0.12+: `%LOCALAPPDATA%\OfficeWhere\provider-discovery.json`
+3. Windows legacy: `%APPDATA%\OfficeWhere\provider-discovery.json`
+4. macOS/Linux Electron userData discovery file
+5. Dev default: `http://127.0.0.1:18765`
+
+Provider URLs must be loopback/local (`localhost`, `127.0.0.1`, or `::1`).
+
+## Usage
+
+```text
+$where-skills 오늘 해야 할 일 정리하고 관련 문서 찾아줘
+$where-skills 신입교육 관련 최근 메일/문서 근거 정리해줘
+```
+
+Helper examples:
+
+```bash
+python scripts/officewhere_provider.py discover
+python scripts/officewhere_provider.py health
+python scripts/officewhere_provider.py manifest
+python scripts/officewhere_provider.py search "신입교육" --limit 20
+```
+
+## Safety rules
+
+where-skills is read-only by default.
 
 It must not:
 
 - send, reply to, delete, move, or mark mail;
 - edit, delete, move, overwrite, or save over source Office/PDF documents;
 - read OfficeWhere SQLite directly;
-- depend on MailWhere SQLite as the intended long-term contract;
-- install active hooks, MCP servers, or background automation without explicit future approval.
+- depend on MailWhere SQLite as the long-term interface;
+- install hooks, MCP servers, or background automation without explicit approval.
 
-## Current repo status
+## Status
 
-This seed contains:
-
-```text
-docs/architecture.md                 provider-first architecture
-docs/mailwhere-provider-contract.md  desired MailWhere SDK/provider v1 shape
-docs/officewhere-provider-notes.md   OfficeWhere provider API usage notes
-docs/roadmap.md                      staged delivery path
-skills/where-skills/SKILL.md         Codex skill draft
-scripts/README.md                    helper script roadmap
-scripts/where_skills_manifest.py     local seed manifest helper
-```
-
-## Design stance
-
-MailWhere full-text search (FTS) is a **MailWhere product/provider concern**, not a where-skills implementation detail. A future MailWhere provider may use task/evidence FTS, Outlook COM live search, or optional full-mail indexing internally, but where-skills should call the provider contract and preserve provenance in results.
-
-## First useful milestone
-
-The first functional milestone after this seed is:
-
-1. MailWhere exposes a read-only provider or CLI SDK for task/review/search context.
-2. OfficeWhere base URL discovery is available or supplied by `OFFICEWHERE_BASE_URL`.
-3. where-skills helper scripts call those providers and generate a markdown + JSON evidence brief.
-
-## License
-
-MIT. This repository is an orchestration layer and does not embed MailWhere or OfficeWhere source code.
+- OfficeWhere provider discovery helper: implemented.
+- MailWhere provider client: pending MailWhere provider/SDK.
+- Combined briefing helper: planned.

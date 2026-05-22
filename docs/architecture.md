@@ -29,7 +29,7 @@ All first-pass operations are read-only or suggestive.
 Allowed:
 
 - list mail-derived tasks/review candidates through MailWhere provider contracts;
-- search registered documents through OfficeWhere provider APIs;
+- search registered documents through OfficeWhere provider APIs discovered from env/app-data metadata;
 - return file names, snippets, IDs, paths, and provenance;
 - draft a reply/report/checklist for the user to review.
 
@@ -50,6 +50,10 @@ A mature where-skills response should include:
 - OfficeWhere evidence with file IDs, names, paths, locations, snippets, and freshness signals;
 - suggested next action or draft;
 - explicit `Not performed` section for mail/document mutation and unavailable provider steps.
+
+## Current runtime discovery
+
+OfficeWhere discovery is handled by the bundled `scripts/officewhere_provider.py`: env override, Windows LocalAppData, legacy Windows Roaming, macOS/Linux userData, then dev default. The helper validates `health` and `manifest` before use.
 
 ## Future runtime layers
 

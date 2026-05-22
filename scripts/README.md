@@ -1,15 +1,26 @@
 # scripts
 
-This directory is reserved for provider-backed helper scripts.
+Provider-backed helpers for where-skills.
 
-Planned helpers:
+## Current helpers
 
-- `mailwhere_provider.py` — client for a future MailWhere read-only provider/SDK.
-- `officewhere_provider.py` — client for OfficeWhere `/api/provider/v1`.
-- `where_brief.py` — combines MailWhere context and OfficeWhere document evidence into Markdown + JSON.
+- `officewhere_provider.py` — discovers and queries OfficeWhere `/api/provider/v1`.
+- `where_skills_manifest.py` — prints the local capability/safety manifest.
 
-Current seed helper:
+## OfficeWhere examples
 
-- `where_skills_manifest.py` — prints the seed capability/safety manifest for verification and future tooling.
+```bash
+python scripts/officewhere_provider.py discover
+python scripts/officewhere_provider.py health
+python scripts/officewhere_provider.py manifest
+python scripts/officewhere_provider.py search "신입교육" --limit 20
+```
 
-Do not add direct OfficeWhere SQLite readers or MailWhere SQLite readers as the default architecture. Any temporary fallback must be explicitly approved and documented as such.
+Discovery prefers OfficeWhere v0.12+ Windows LocalAppData, then legacy Roaming, then macOS/Linux userData, then the dev default. Provider URLs must be loopback/local.
+
+## Planned helpers
+
+- `mailwhere_provider.py` — pending MailWhere provider/SDK.
+- `where_brief.py` — combine MailWhere context and OfficeWhere evidence into Markdown + JSON.
+
+Do not add direct OfficeWhere SQLite readers or MailWhere SQLite readers as the default architecture.
