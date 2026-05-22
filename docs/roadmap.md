@@ -11,7 +11,7 @@
 ## Phase 1 — Provider-backed helpers
 
 - Done: `officewhere_provider.py` discovers OfficeWhere and calls `/api/provider/v1`.
-- Next: add `mailwhere_provider.py` once MailWhere exposes a provider/SDK.
+- Done: `mailwhere_provider.py` locates and invokes MailWhere.Cli read-only JSON provider.
 - Next: add `where_brief.py` to combine mail/task context and document evidence into Markdown + JSON artifacts.
 
 ## Phase 2 — Routing hints and safety guards

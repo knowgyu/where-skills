@@ -1,14 +1,14 @@
 # MailWhere Provider Contract Draft
 
-This is a desired contract for MailWhere to expose in the future. It is not implemented by where-skills in this seed.
+MailWhere exposes the current read-only provider as `MailWhere.Cli.exe`; where-skills calls it through `scripts/mailwhere_provider.py`. This document keeps the v1 response shape and future SDK direction.
 
 ## Contract goal
 
-MailWhere should act as the **mail/task provider** for where-skills. It should hide Outlook COM, local storage, deduplication, FTS, and privacy policy details behind a stable read-only provider or SDK.
+MailWhere acts as the **mail/task provider** for where-skills. It should hide Outlook COM, local storage, deduplication, FTS, and privacy policy details behind a stable read-only provider or SDK.
 
 ## Non-goals for this seed
 
-- No MailWhere product code changes.
+- No direct MailWhere product code changes from where-skills.
 - No FTS implementation.
 - No Outlook COM live-search implementation.
 - No direct dependency on MailWhere SQLite as the intended interface.

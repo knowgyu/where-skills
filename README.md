@@ -19,13 +19,27 @@ The skill directory includes its OfficeWhere helper. From this repo, run:
 
 ```bash
 python scripts/officewhere_provider.py discover
+python scripts/mailwhere_provider.py discover
 ```
 
 After copying only the skill directory, the same helper is at:
 
 ```bash
 python ~/.codex/skills/where-skills/scripts/officewhere_provider.py discover
+python ~/.codex/skills/where-skills/scripts/mailwhere_provider.py discover
 ```
+
+## MailWhere discovery
+
+MailWhere has a read-only CLI provider in the portable zip: `MailWhere.Cli.exe`.
+
+Discovery order:
+
+1. `MAILWHERE_CLI_PATH` override, if set
+2. `MailWhere.Cli.exe` on `PATH`
+3. Windows running `MailWhere.exe` process path, then sibling `MailWhere.Cli.exe`
+
+Optional data DB override: `MAILWHERE_DB_PATH`.
 
 ## OfficeWhere discovery
 
@@ -55,6 +69,7 @@ python scripts/officewhere_provider.py discover
 python scripts/officewhere_provider.py health
 python scripts/officewhere_provider.py manifest
 python scripts/officewhere_provider.py search "신입교육" --limit 20
+python scripts/mailwhere_provider.py list-tasks --status open --limit 20
 ```
 
 ## Safety rules
@@ -72,5 +87,5 @@ It must not:
 ## Status
 
 - OfficeWhere provider discovery helper: implemented.
-- MailWhere provider client: pending MailWhere provider/SDK.
+- MailWhere CLI provider helper: implemented.
 - Combined briefing helper: planned.

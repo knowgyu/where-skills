@@ -37,12 +37,28 @@ Do not:
 ## Preferred workflow
 
 1. Restate the interpreted work question.
-2. Query MailWhere through its provider/SDK when available.
+2. Query MailWhere through the bundled `scripts/mailwhere_provider.py` helper when available.
 3. Derive document search hints from sanitized MailWhere task/review/mail context.
 4. Discover OfficeWhere with the bundled `scripts/officewhere_provider.py` helper when needed, then query `/api/provider/v1`.
 5. Produce a concise briefing with evidence and provenance.
 6. Include a `Not performed` section listing blocked or intentionally skipped side effects.
 
+
+## MailWhere discovery
+
+Use the bundled helper when mail/task context is needed:
+
+```bash
+python scripts/mailwhere_provider.py discover
+```
+
+Discovery order:
+
+1. `MAILWHERE_CLI_PATH`
+2. `MailWhere.Cli.exe` on `PATH`
+3. running Windows `MailWhere.exe` sibling `MailWhere.Cli.exe`
+
+The helper invokes MailWhere.Cli with `--json`; it does not read SQLite directly.
 
 ## OfficeWhere discovery
 
@@ -62,7 +78,7 @@ Discovery order:
 
 ## Provider unavailable behavior
 
-If MailWhere or OfficeWhere provider access is unavailable, do not scrape product databases by default. For OfficeWhere, first try the helper discovery order above. Provider URLs must be loopback/local. Report the missing provider and explain which part of the answer is blocked.
+If MailWhere or OfficeWhere provider access is unavailable, do not scrape product databases by default. For MailWhere, first try the CLI helper discovery order above. For OfficeWhere, first try the helper discovery order above. OfficeWhere provider URLs must be loopback/local. Report the missing provider and explain which part of the answer is blocked.
 
 A future fallback may be added only after explicit approval and must preserve raw-body and SQLite boundary rules.
 
