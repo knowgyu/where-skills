@@ -1,5 +1,7 @@
 # OfficeWhere Provider Notes
 
+> Historical migration input. The canonical current contract lives in `OfficeWhere/docs/provider-contract.md`.
+
 OfficeWhere exposes a read-oriented provider API for local automation.
 
 ## Base path

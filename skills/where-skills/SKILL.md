@@ -1,10 +1,12 @@
 ---
 name: where-skills
-description: "Connect MailWhere mail/task context with OfficeWhere document evidence in Codex CLI. Use for Korean or English work questions that combine mail-derived tasks, recent business context, related documents, or draft next actions."
+description: "Legacy compatibility wrapper for MailWhere and OfficeWhere. Do not install for new workflows; use contextWhere for cross-provider evidence, wiki, and context packs."
 argument-hint: "<mail/task/document question>"
 ---
 
 # where-skills
+
+> Archive candidate. Use contextWhere for new cross-provider workflows.
 
 Use this skill when the user asks Codex CLI to answer work questions that may require both:
 
@@ -21,7 +23,8 @@ Examples:
 
 - MailWhere = mail/task provider.
 - OfficeWhere = document provider.
-- where-skills = orchestration and briefing layer.
+- contextWhere = canonical orchestration and briefing layer.
+- where-skills = legacy compatibility wrapper pending retirement.
 
 ## Required safety boundaries
 

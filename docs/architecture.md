@@ -1,6 +1,6 @@
 # Architecture
 
-`where-skills` is a thin Codex CLI orchestration layer. It should not become the owner of mail extraction, document indexing, or product-specific persistence.
+`where-skills` was a thin Codex CLI orchestration layer. Its intended orchestration role now belongs to contextWhere; this repository remains only as a retirement-stage compatibility reference and should not gain new product features.
 
 ## Role split
 
@@ -14,7 +14,8 @@ User prompt
 
 - **MailWhere** owns Outlook integration, mail-derived task state, review candidates, mail search, and future FTS/live-search behavior.
 - **OfficeWhere** owns document registration, indexing, search, version grouping, duplicate detection, and comparison.
-- **where-skills** owns prompt interpretation, provider call sequencing, evidence synthesis, and safe output formatting.
+- **contextWhere** owns provider call sequencing, evidence synthesis, Markdown wiki, context packs, and safe output formatting.
+- **where-skills** retains only legacy helper/discovery code until retirement prerequisites are complete.
 
 ## Provider-first boundary
 
@@ -41,9 +42,9 @@ Not allowed:
 - direct MailWhere SQLite as the long-term integration;
 - automatic hook-triggered provider calls without explicit future approval.
 
-## Output contract
+## Legacy output contract
 
-A mature where-skills response should include:
+An existing where-skills response should include:
 
 - interpreted intent;
 - MailWhere evidence with task/review/mail IDs when available;
@@ -55,12 +56,6 @@ A mature where-skills response should include:
 
 OfficeWhere discovery is handled by the bundled `scripts/officewhere_provider.py`: env override, Windows LocalAppData, legacy Windows Roaming, macOS/Linux userData, then dev default. The helper validates `health` and `manifest` before use.
 
-## Future runtime layers
+## Retirement boundary
 
-Staged additions should happen in this order:
-
-1. skill and documentation seed;
-2. provider-backed helper scripts;
-3. optional safe routing hints/hooks;
-4. plugin packaging;
-5. optional local MCP server after contracts stabilize.
+The MailWhere helper is functionally replaced by `MailWhere.Cli` plus contextWhere's adapter. OfficeWhere's contract is canonical in OfficeWhere, but contextWhere does not yet consume the packaged dynamic-port discovery file. Archive the remote after that choice is resolved and references move to product-owned docs; do not add hooks, plugin packaging, MCP, or the previously planned combined helper here.

@@ -1,4 +1,6 @@
-# Roadmap
+# Historical roadmap and retirement gate
+
+This roadmap is closed. MailWhere and OfficeWhere own provider behavior; contextWhere owns orchestration.
 
 ## Phase 0 — Working MVP seed
 
@@ -12,23 +14,15 @@
 
 - Done: `officewhere_provider.py` discovers OfficeWhere and calls `/api/provider/v1`.
 - Done: `mailwhere_provider.py` locates and invokes MailWhere.Cli read-only JSON provider.
-- Next: add `where_brief.py` to combine mail/task context and document evidence into Markdown + JSON artifacts.
+- Cancelled here: `where_brief.py`; contextWhere evidence/context-pack flows replace it.
 
-## Phase 2 — Routing hints and safety guards
+## Cancelled phases
 
-- Add optional routing hook drafts after explicit approval.
-- Hooks should only suggest/route to `where-skills`; they must not scan mail or documents automatically.
-- Safety guards can block destructive patterns such as mail mutation or source document deletion.
+- Routing hooks, plugin packaging, and a local MCP server will not be added to this repository.
 
-## Phase 3 — Plugin packaging
+## Archive gate
 
-- Package skill, helper scripts, optional agents, and optional hooks into a local Codex plugin.
-
-## Phase 4 — Optional MCP
-
-- Add a local MCP server only after provider contracts and helper scripts are stable.
-- MCP tools should remain read-only by default.
-
-## Future MailWhere FTS note
-
-MailWhere FTS is worth considering as a product/provider capability, especially for task/review/evidence/search-hint search. Full raw mail body FTS should remain opt-in and requires explicit privacy/retention/deletion policy in MailWhere, not where-skills.
+1. Replace live `local:where-skills/...` references with MailWhere/OfficeWhere product docs.
+2. Decide whether contextWhere consumes OfficeWhere `provider-discovery.json` or requires an explicit base URL.
+3. Confirm no installed skill or active automation depends on this checkout.
+4. Archive the remote; delete the local checkout only after the reference check passes.

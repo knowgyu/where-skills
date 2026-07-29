@@ -1,5 +1,7 @@
 # MailWhere Provider Contract Draft
 
+> Historical migration input. The canonical current contract lives in MailWhere's README, architecture, deployment, and release docs.
+
 MailWhere exposes the current read-only provider as `MailWhere.Cli.exe`; where-skills calls it through `scripts/mailwhere_provider.py`. This document keeps the v1 response shape and future SDK direction.
 
 ## Contract goal

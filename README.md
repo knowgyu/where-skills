@@ -1,12 +1,16 @@
 # where-skills
 
+> **Status: archive candidate.** MailWhere now owns the mail provider, OfficeWhere owns the document provider, and contextWhere owns cross-provider evidence/wiki/context-pack orchestration. Do not install this as the default skill for new setups.
+
 Codex skill + helper scripts that combine:
 
 - **MailWhere**: mail/task context provider
 - **OfficeWhere**: document evidence provider
 - **where-skills**: read-only orchestration and briefing
 
-## Install
+## Historical install
+
+Do not use this path for new setups; it is retained only to explain existing copies.
 
 Copy the skill directory into your Codex skills folder:
 
@@ -55,7 +59,7 @@ Discovery order:
 
 Provider URLs must be loopback/local (`localhost`, `127.0.0.1`, or `::1`).
 
-## Usage
+## Historical usage
 
 ```text
 $where-skills 오늘 해야 할 일 정리하고 관련 문서 찾아줘
@@ -88,4 +92,7 @@ It must not:
 
 - OfficeWhere provider discovery helper: implemented.
 - MailWhere CLI provider helper: implemented.
-- Combined briefing helper: planned.
+- Combined briefing helper: never implemented; contextWhere replaces that orchestration role.
+- The skill is not installed in the current Codex environment.
+- Keep this repository read-only until contextWhere either consumes OfficeWhere's packaged `provider-discovery.json` or adopts explicit `--officewhere-base-url` configuration as the permanent contract.
+- After that decision and a final reference check, archive the GitHub repository rather than deleting its history. Local deletion is safe only after live `local:where-skills/...` references are gone.

@@ -31,6 +31,6 @@ Discovery prefers OfficeWhere v0.12+ Windows LocalAppData, then legacy Roaming, 
 
 ## Planned helpers
 
-- `where_brief.py` — combine MailWhere context and OfficeWhere evidence into Markdown + JSON.
+- `where_brief.py` was planned but never implemented; contextWhere now owns combined evidence and context-pack generation.
 
 Do not add direct OfficeWhere SQLite readers or MailWhere SQLite readers as the default architecture.
